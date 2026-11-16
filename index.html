@@ -1,1 +1,659 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Doces</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+--bg: #f6ecdc;
+--card: #fffaf0;
+--ink: #4a1d12;
+--muted: #7d5c4d;
+--accent: #b5405e;
+--line: #dcc7a6;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+margin: 0;
+background: var(--bg);
+color: var(--ink);
+font-family: Nunito, sans-serif;
+line-height: 1.65;
+}
+
+.wrap {
+max-width: 1000px;
+margin: auto;
+padding: 0 22px;
+}
+
+header {
+position: sticky;
+top: 0;
+background: var(--bg);
+border-bottom: 1px solid var(--line);
+z-index: 10;
+}
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+height: 65px;
+}
+
+.brand {
+font: 700 1.8rem "Cormorant Garamond", serif;
+color: var(--ink);
+text-decoration: none;
+}
+
+nav {
+display: flex;
+gap: 20px;
+}
+
+nav a {
+color: var(--ink);
+text-decoration: none;
+font-weight: bold;
+}
+
+nav .pill {
+background: var(--ink);
+color: var(--bg);
+padding: 6px 16px;
+border-radius: 30px;
+}
+
+.btn {
+display: inline-block;
+background: var(--ink);
+color: var(--bg);
+padding: 13px 28px;
+border-radius: 30px;
+text-decoration: none;
+font-weight: bold;
+border: 0;
+cursor: pointer;
+}
+
+.btn.alt {
+background: transparent;
+color: inherit;
+border: 2px solid currentColor;
+}
+
+.hero {
+background: #4a1d12;
+color: #f6ecdc;
+padding: 75px 0;
+}
+
+.hero h1 {
+font: 700 clamp(2.6rem, 7vw, 4.8rem) "Cormorant Garamond", serif;
+line-height: 1.05;
+}
+
+.hero p {
+font-size: 1.1rem;
+margin-bottom: 28px;
+}
+
+.hero .btn {
+background: #f6ecdc;
+color: #4a1d12;
+}
+
+.hero .btn.alt {
+background: transparent;
+color: #f6ecdc;
+}
+
+.cta {
+display: flex;
+gap: 14px;
+flex-wrap: wrap;
+}
+
+section { padding: 65px 0; }
+
+.head { margin-bottom: 30px; }
+
+.head h2 {
+font: 700 clamp(2.2rem, 5vw, 3.2rem) "Cormorant Garamond", serif;
+}
+
+.head p { color: var(--muted); }
+
+.plaque {
+background: var(--card);
+border: 3px solid var(--ink);
+border-radius: 30px;
+padding: 15px;
+}
+
+.plaque > div {
+border: 1px solid var(--ink);
+border-radius: 22px;
+padding: 10px 25px;
+}
+
+.item {
+padding: 22px 0;
+border-bottom: 1px dashed var(--line);
+}
+
+.item:last-child { border: 0; }
+
+.row {
+display: flex;
+align-items: baseline;
+gap: 10px;
+}
+
+.row h3 {
+font: 700 1.65rem "Cormorant Garamond", serif;
+margin: 0;
+}
+
+.dots {
+flex: 1;
+border-bottom: 2px dotted var(--muted);
+}
+
+.price {
+font: 700 1.65rem "Cormorant Garamond", serif;
+color: var(--accent);
+white-space: nowrap;
+}
+
+.meta {
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 12px;
+margin-top: 6px;
+color: var(--muted);
+}
+
+.add {
+background: var(--ink);
+color: var(--bg);
+border: 0;
+border-radius: 25px;
+padding: 9px 20px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.flavors {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 14px;
+}
+
+.chip {
+border: 2px solid var(--ink);
+background: transparent;
+color: var(--ink);
+border-radius: 25px;
+padding: 8px 15px;
+cursor: pointer;
+}
+
+.chip:hover {
+background: var(--ink);
+color: white;
+}
+
+.modes, .order {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+
+.mode, .panel {
+background: var(--card);
+border: 1px solid var(--line);
+border-radius: 20px;
+padding: 22px;
+}
+
+.mode h3, .panel h3 {
+font: 700 1.7rem "Cormorant Garamond", serif;
+margin: 0 0 10px;
+}
+
+.mode p { margin: 0; color: var(--muted); }
+
+#cart {
+list-style: none;
+padding: 0;
+}
+
+#cart li {
+display: grid;
+grid-template-columns: 1fr auto auto;
+gap: 10px;
+align-items: center;
+padding: 10px 0;
+border-bottom: 1px dashed var(--line);
+}
+
+#cart li.empty {
+display: block;
+color: var(--muted);
+}
+
+.qty {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.qty button {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+border: 2px solid var(--ink);
+background: transparent;
+color: var(--ink);
+cursor: pointer;
+}
+
+.lt {
+min-width: 75px;
+text-align: right;
+font-weight: bold;
+}
+
+.total {
+display: flex;
+justify-content: space-between;
+font: 700 1.6rem "Cormorant Garamond", serif;
+margin-top: 15px;
+}
+
+label {
+display: block;
+font-weight: bold;
+margin: 14px 0 5px;
+}
+
+input, textarea {
+width: 100%;
+background: var(--bg);
+color: var(--ink);
+border: 1px solid var(--line);
+border-radius: 12px;
+padding: 12px;
+font: inherit;
+}
+
+textarea { resize: vertical; }
+
+.seg {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 8px;
+}
+
+.seg button {
+border: 2px solid var(--ink);
+background: transparent;
+color: var(--ink);
+border-radius: 12px;
+padding: 10px;
+cursor: pointer;
+}
+
+.seg button[aria-pressed="true"] {
+background: var(--ink);
+color: white;
+}
+
+#send {
+display: block;
+margin-top: 20px;
+text-align: center;
+}
+
+#hint { color: var(--accent); }
+
+footer {
+background: #4a1d12;
+color: #eadbc3;
+text-align: center;
+padding: 35px;
+}
+
+footer b {
+display: block;
+font: 700 1.8rem "Cormorant Garamond", serif;
+color: white;
+}
+
+@media(max-width:760px) {
+.modes, .order { grid-template-columns: 1fr; }
+.hero { padding: 45px 0; }
+.row h3 { font-size: 1.35rem; }
+.plaque > div { padding: 5px 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap nav">
+<a class="brand" href="#inicio">Rose Doces</a>
+<nav>
+<a href="#cardapio">Cardápio</a>
+<a class="pill" href="#pedido">Pedido (<span id="count">0</span>)</a>
+</nav>
+</div>
+</header>
+
+<main id="inicio">
+
+<div class="hero">
+<div class="wrap">
+<h1>Sabores que fazem a vida mais doce</h1>
+<p>Rocamboles e pastéis doces em bandejas com 2 unidades. Peça por delivery, retire ou faça sua encomenda.</p>
+<div class="cta">
+<a class="btn" href="#cardapio">Ver cardápio</a>
+<a class="btn alt" href="#pedido">Fazer pedido</a>
+</div>
+</div>
+</div>
+
+<section id="cardapio">
+<div class="wrap">
+<div class="head">
+<h2>Cardápio</h2>
+<p>Todas as opções vêm em bandeja com 2 unidades.</p>
+</div>
+
+<div class="plaque">
+<div>
+
+<div class="item">
+<div class="row">
+<h3>Rocambole de chocolate com Nutella</h3>
+<span class="dots"></span>
+<span class="price">R$ 16,00</span>
+</div>
+<div class="meta">
+<span>Bandeja com 2 unidades</span>
+<button class="add" data-name="Rocambole de chocolate com Nutella" data-price="16">Adicionar</button>
+</div>
+</div>
+
+<div class="item">
+<div class="row">
+<h3>Rocambole de ninho com Nutella</h3>
+<span class="dots"></span>
+<span class="price">R$ 16,00</span>
+</div>
+<div class="meta">
+<span>Bandeja com 2 unidades</span>
+<button class="add" data-name="Rocambole de ninho com Nutella" data-price="16">Adicionar</button>
+</div>
+</div>
+
+<div class="item">
+<div class="row">
+<h3>Rocamboles tradicionais</h3>
+<span class="dots"></span>
+<span class="price">R$ 12,00</span>
+</div>
+<div class="meta">
+<span>Bandeja com 2 unidades. Escolha o sabor:</span>
+</div>
+<div class="flavors" id="flavors"></div>
+</div>
+
+<div class="item">
+<div class="row">
+<h3>Pastel de ninho com Nutella</h3>
+<span class="dots"></span>
+<span class="price">R$ 12,00</span>
+</div>
+<div class="meta">
+<span>Bandeja com 2 unidades</span>
+<button class="add" data-name="Pastel de ninho com Nutella" data-price="12">Adicionar</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section id="pedido">
+<div class="wrap">
+<div class="head">
+<h2>Faça seu pedido ou encomenda</h2>
+<p>Monte seu pedido e envie pelo WhatsApp.</p>
+</div>
+
+<div class="modes">
+<div class="mode">
+<h3>Delivery</h3>
+<p>Receba suas bandejas onde você estiver.</p>
+</div>
+<div class="mode">
+<h3>Retirada</h3>
+<p>Faça o pedido e retire com a gente.</p>
+</div>
+</div>
+
+<div class="order">
+
+<div class="panel">
+<h3>Seu pedido</h3>
+<ul id="cart"></ul>
+<div class="total">
+<span>Total</span>
+<span id="total">R$ 0,00</span>
+</div>
+</div>
+
+<div class="panel">
+<h3>Seus dados</h3>
+
+<label for="nome">Nome</label>
+<input id="nome" autocomplete="name">
+
+<label>Como você quer receber?</label>
+<div class="seg">
+<button type="button" data-mode="Delivery" aria-pressed="true">Delivery</button>
+<button type="button" data-mode="Retirada" aria-pressed="false">Retirada</button>
+</div>
+
+<div id="addr-wrap">
+<label for="end">Endereço de entrega</label>
+<input id="end" autocomplete="street-address">
+</div>
+
+<label for="quando">Para quando? (encomendas)</label>
+<input id="quando" placeholder="Ex.: sábado, às 15h">
+
+<label for="obs">Observações</label>
+<textarea id="obs"></textarea>
+
+<a class="btn" id="send" target="_blank" rel="noopener">Enviar pedido no WhatsApp</a>
+<div id="hint"></div>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<b>Rose Doces</b>
+Sabores que fazem a vida mais doce.
+<small>WhatsApp (44) 9824-6086</small>
+<small>© 2026 Rose Doces</small>
+</footer>
+
+<script>
+const WHATSAPP = '554498246086';
+const $ = s => document.querySelector(s);
+const brl = v => 'R$ ' + v.toFixed(2).replace('.', ',');
+const cart = {};
+let mode = 'Delivery';
+
+const FLAVORS = [
+'Ninho com brigadeiro',
+'Ninho com prestígio',
+'Chocolate com brigadeiro',
+'Chocolate com prestígio'
+];
+
+function add(name, price, btn) {
+cart[name] = cart[name] || {price, q: 0};
+cart[name].q++;
+draw();
+}
+
+FLAVORS.forEach(f => {
+const b = document.createElement('button');
+b.className = 'chip';
+b.type = 'button';
+b.textContent = '+ ' + f;
+b.onclick = () => add('Rocambole tradicional de ' + f.toLowerCase(), 12, b);
+$('#flavors').append(b);
+});
+
+document.querySelectorAll('.add[data-name]').forEach(b => {
+b.onclick = () => add(b.dataset.name, +b.dataset.price, b);
+});
+
+function items() {
+return Object.keys(cart).filter(k => cart[k].q > 0);
+}
+
+function total() {
+return items().reduce((a, k) => a + cart[k].price * cart[k].q, 0);
+}
+
+function draw() {
+const ul = $('#cart');
+ul.innerHTML = '';
+const names = items();
+
+$('#count').textContent = names.reduce((a, k) => a + cart[k].q, 0);
+
+if (!names.length) {
+const li = document.createElement('li');
+li.className = 'empty';
+li.textContent = 'Seu pedido está vazio. Escolha uma bandeja no cardápio.';
+ul.append(li);
+}
+
+names.forEach(k => {
+const li = document.createElement('li');
+const n = document.createElement('span');
+const q = document.createElement('span');
+const m = document.createElement('button');
+const c = document.createElement('b');
+const p = document.createElement('button');
+const t = document.createElement('span');
+
+n.textContent = k;
+q.className = 'qty';
+t.className = 'lt';
+
+m.type = p.type = 'button';
+m.textContent = '−';
+p.textContent = '+';
+
+m.onclick = () => { cart[k].q--; draw(); };
+p.onclick = () => { cart[k].q++; draw(); };
+
+c.textContent = cart[k].q;
+t.textContent = brl(cart[k].price * cart[k].q);
+
+q.append(m, c, p);
+li.append(n, q, t);
+ul.append(li);
+});
+
+$('#total').textContent = brl(total());
+update();
+}
+
+function message() {
+let s = 'Olá, Rose Doces! Quero fazer um pedido:\n';
+
+items().forEach(k => {
+s += '• ' + cart[k].q + 'x ' + k +
+' (bandeja com 2 unidades): ' +
+brl(cart[k].price * cart[k].q) + '\n';
+});
+
+s += 'Total: ' + brl(total());
+s += '\nRecebimento: ' + mode;
+
+const v = id => $(id).value.trim();
+
+if (mode === 'Delivery' && v('#end'))
+s += '\nEndereço: ' + v('#end');
+
+if (v('#quando')) s += '\nPara quando: ' + v('#quando');
+if (v('#obs')) s += '\nObservações: ' + v('#obs');
+if (v('#nome')) s += '\nNome: ' + v('#nome');
+
+return s;
+}
+
+function update() {
+$('#send').href =
+'https://wa.me/' + WHATSAPP +
+'?text=' + encodeURIComponent(message());
+}
+
+document.querySelectorAll('.seg button').forEach(b => {
+b.onclick = () => {
+mode = b.dataset.mode;
+
+document.querySelectorAll('.seg button').forEach(x => {
+x.setAttribute('aria-pressed', x === b);
+});
+
+$('#addr-wrap').hidden = mode !== 'Delivery';
+update();
+};
+});
+
+['#nome', '#end', '#quando', '#obs'].forEach(id => {
+$(id).addEventListener('input', update);
+});
+
+$('#send').addEventListener('click', e => {
+if (!items().length) {
+e.preventDefault();
+$('#hint').textContent = 'Adicione ao menos uma bandeja do cardápio.';
+}
+});
+
+draw();
+</script>
+
+</body>
+</html>
+
